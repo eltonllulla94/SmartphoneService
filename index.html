@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smartphone Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root{
+      --navy:#092743;
+      --navy2:#113d5b;
+      --teal:#2fa6ad;
+      --teal2:#6bd0cb;
+      --light:#f3f8fb;
+      --muted:#6c7f93;
+      --border:#d9e5ec;
+      --white:#fff;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:"Plus Jakarta Sans",system-ui,sans-serif;
+      background:#fff;
+      color:var(--navy);
+      overflow-x:hidden;
+    }
+    .container{width:min(1180px,calc(100% - 40px));margin:auto}
+    header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(247,251,253,.88);
+      backdrop-filter:blur(14px);
+      box-shadow:0 1px 0 rgba(12,47,75,.05);
+    }
+    .nav{height:64px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:17px}
+    .logo,.iconbox{
+      width:36px;height:36px;border-radius:11px;
+      background:linear-gradient(135deg,var(--teal),#58c3c2);
+      display:grid;place-items:center;color:white;box-shadow:0 8px 22px rgba(47,166,173,.26)
+    }
+    .logo i{width:19px}
+    nav{display:flex;gap:34px;font-size:14px;font-weight:700}
+    nav a{color:#223a54;text-decoration:none;opacity:.88}
+    .call{
+      display:inline-flex;align-items:center;gap:10px;
+      background:var(--teal);color:white;text-decoration:none;
+      border-radius:14px;padding:12px 20px;font-weight:800;font-size:14px;
+      box-shadow:0 10px 22px rgba(47,166,173,.22)
+    }
+    .call i{width:17px}
+    .hero{
+      min-height:825px;padding:82px 0 100px;
+      background:
+        radial-gradient(700px 460px at 82% 48%,rgba(70,210,210,.25),transparent 70%),
+        linear-gradient(115deg,#092540 0%,#123b5a 48%,#2e9ea9 100%);
+      color:white;
+    }
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+    .pill{
+      display:inline-flex;align-items:center;gap:9px;
+      background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+      color:#dcebf3;border-radius:999px;padding:10px 15px;font-size:13px;font-weight:800;margin-bottom:36px
+    }
+    .dot{width:8px;height:8px;background:var(--teal2);border-radius:50%}
+    h1{font-size:64px;line-height:1.08;letter-spacing:-3px;font-weight:800;margin-bottom:28px}
+    h1 span{color:#86d9d6}
+    .hero p{font-size:18px;line-height:1.65;color:#c4d4df;max-width:580px;font-weight:700}
+    .buttons{display:flex;gap:16px;margin:32px 0 48px}
+    .btn{
+      display:inline-flex;align-items:center;gap:12px;border-radius:12px;padding:17px 26px;
+      color:white;text-decoration:none;font-weight:800;border:1px solid rgba(255,255,255,.24)
+    }
+    .btn.primary{background:var(--teal);border-color:transparent}
+    .btn i{width:18px}
+    .meta{display:flex;gap:28px;color:#b7c9d5;font-weight:700;font-size:14px;align-items:center}
+    .meta span{display:flex;gap:8px;align-items:center}.meta i{width:16px;color:#9edadd}
+    .hero-img{
+      height:455px;border-radius:22px;overflow:hidden;
+      box-shadow:0 30px 80px rgba(0,0,0,.18)
+    }
+    .hero-img img,.photo-card img{width:100%;height:100%;object-fit:cover;display:block}
+    .stats{background:#f6f9fb;padding:62px 0}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+    .stat{
+      background:white;border:1px solid var(--border);border-radius:14px;
+      padding:28px;text-align:center;box-shadow:0 10px 24px rgba(12,47,75,.04)
+    }
+    .stat i{color:var(--teal);width:30px;height:30px;margin-bottom:14px}
+    .stat strong{font-size:34px;display:block;color:#071e3b}
+    .stat span{color:var(--muted);font-size:13px;font-weight:600}
+    section{padding:110px 0;background:#f6f9fb}
+    .center{text-align:center;margin-bottom:62px}
+    .kicker{color:var(--teal);font-weight:800;letter-spacing:4px;font-size:13px;text-transform:uppercase;margin-bottom:18px}
+    h2{font-size:46px;line-height:1.08;letter-spacing:-2px;color:#071e3b;font-weight:800}
+    .center p{color:#718498;max-width:620px;margin:18px auto 0;line-height:1.7;font-weight:600}
+    .services{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .service-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .photo-card{
+      position:relative;min-height:265px;border-radius:18px;overflow:hidden;
+      display:flex;align-items:flex-end;padding:34px;color:white
+    }
+    .photo-card.large{grid-column:span 2}
+    .photo-card.tall{min-height:450px}
+    .photo-card:after{
+      content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,24,43,.35),rgba(5,24,43,.88));
+    }
+    .photo-card img{position:absolute;inset:0}
+    .photo-card .content{position:relative;z-index:2}
+    .photo-card i,.mini i{color:#58c3c2;width:35px;height:35px;margin-bottom:22px}
+    .photo-card h3{font-size:25px;margin-bottom:10px;color:white}
+    .photo-card p{color:#e5eef2;font-weight:600;line-height:1.6}
+    .mini{
+      background:white;border:1px solid var(--border);border-radius:18px;padding:34px 28px;min-height:170px;
+      display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 20px rgba(12,47,75,.03)
+    }
+    .mini h3{font-size:17px;margin-bottom:9px}.mini p{color:var(--muted);font-size:14px;font-weight:600}
+    .mini.teal{background:linear-gradient(135deg,var(--teal),#60c9c5);color:white;border:0}.mini.teal p,.mini.teal i{color:white}
+    .process{
+      background:linear-gradient(115deg,#092540,#1c526f 55%,#2e9ea9);color:white;padding:95px 0
+    }
+    .process h2{color:white}.process .kicker{color:#58c3c2}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+    .step{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:28px;min-height:170px}
+    .step b{font-size:42px;color:#58c3c2;opacity:.72;display:block;margin-bottom:12px}
+    .step h3{font-size:17px;margin-bottom:12px;color:white}.step p{color:#c9dbe4;line-height:1.55;font-size:14px;font-weight:600}
+    .reviews{background:#eaf3f7}
+    .stars{color:#269ca6;font-size:24px;margin-top:14px}
+    .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .review{background:white;border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:0 10px 24px rgba(12,47,75,.04)}
+    .review .stars{font-size:17px;margin:0 0 18px}.review p{line-height:1.65;color:#16314d;font-weight:600;min-height:75px}
+    .person{border-top:1px solid var(--border);margin-top:20px;padding-top:18px;display:flex;gap:14px;align-items:center}
+    .avatar{width:38px;height:38px;border-radius:50%;background:var(--teal);color:white;display:grid;place-items:center;font-weight:800}
+    .person b{font-size:13px}.person small{display:block;color:#718498;font-size:12px;margin-top:3px}
+    .contact-wrap{background:#fff;padding:82px 0}
+    .contact-card{
+      border-radius:26px;padding:72px;
+      background:linear-gradient(115deg,#092540,#1a526f 55%,#2e9ea9);color:white;
+      display:grid;grid-template-columns:1fr 1fr;gap:70px;box-shadow:0 30px 65px rgba(8,31,53,.12)
+    }
+    .contact-card h2{color:white;font-size:46px}.contact-card p{color:#dbe8ef;margin:22px 0 32px;line-height:1.7;font-weight:600}
+    .info{display:grid;gap:18px}
+    .info-row{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:22px;display:flex;gap:18px;align-items:center}
+    .info-row small{display:block;color:#bcd4df;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+    .info-row b{font-size:16px;color:white}
+    footer{background:#08233d;color:white;padding:34px 0}
+    footer .container{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+    @media(max-width:900px){
+      nav{display:none}.hero{padding-top:55px;min-height:auto}.hero-grid,.services,.contact-card{grid-template-columns:1fr;gap:38px}
+      h1{font-size:46px}.hero-img{height:330px}.stats-grid,.steps,.review-grid{grid-template-columns:1fr 1fr}
+      .service-col{grid-template-columns:1fr}.photo-card.large{grid-column:auto}
+      .contact-card{padding:38px}.container{width:min(100% - 28px,1180px)}
+    }
+    @media(max-width:560px){
+      .call{padding:10px 12px;font-size:0}.brand{font-size:15px}
+      h1{font-size:40px}h2,.contact-card h2{font-size:34px}.stats-grid,.steps,.review-grid{grid-template-columns:1fr}
+      .buttons,.meta,footer .container{flex-direction:column;align-items:flex-start}.hero-img{height:260px}
+      section{padding:75px 0}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><div class="logo"><i data-lucide="smartphone"></i></div>Smartphone Service</div>
+      <nav><a href="#services">Shërbimet</a><a href="#reviews">Vlerësime</a><a href="#contact">Kontakt</a></nav>
+<a class="call" href="tel:+355675345537<a class="call" href="tel:+355675345537      <a class="call" href="tel:+355675345537"><i data-lucide="phone"></i>Telefono</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill"><span class="dot"></span>Vlerësuar 5.0 ★ në Google · Kavajë</div>
+          <h1>Riparime <span>smartphone</span> të shpejta dhe të besueshme</h1>
+          <p>Ndërrojmë ekrane, bateri, lidhës karikimi, dëme uji dhe rikuperim të dhënash — për të gjitha markat. Çmime të ndershme, garanci e plotë.</p>
+          <div class="buttons">
+<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537            <a class="btn primary" href="tel:+355675345537"><i data-lucide="phone"></i>Telefono Tani</a>
+            <a class="btn" href="#services">Shiko Shërbimet</a>
+          </div>
+          <div class="meta">
+            <span><i data-lucide="map-pin"></i>Rruga Gazetari 4269, Kavajë</span>
+            <span><span class="dot"></span>Hapur 9:00 – 19:00</span>
+          </div>
+        </div>
+        <div class="hero-img">
+          <img src="https://raw.githubusercontent.com/eltonllulla94/outlook-signature-icons/refs/heads/main/Riparim.jpg" alt="Riparim telefoni">
+        </div>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="container stats-grid">
+        <div class="stat"><i data-lucide="clock"></i><strong>30 min</strong><span>Riparim ekrani mesatar</span></div>
+        <div class="stat"><i data-lucide="users"></i><strong>2,500+</strong><span>Klientë të kënaqur</span></div>
+        <div class="stat"><i data-lucide="shield-check"></i><strong>100%</strong><span>Garanci në çdo punë</span></div>
+        <div class="stat"><i data-lucide="award"></i><strong>10+</strong><span>Vite eksperiencë</span></div>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="container">
+        <div class="center">
+          <div class="kicker">Shërbimet tona</div>
+          <h2>Çdo problem ka një zgjidhje<br>këtu</h2>
+          <p>Nga ekranet e thyera te dëmet nga uji — ne i rregullojmë të gjitha modelet, shpejt dhe me garanci.</p>
+        </div>
+        <div class="services">
+          <div class="service-col">
+            <div class="photo-card large">
+              <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1100&q=85" alt="">
+              <div class="content"><i data-lucide="smartphone"></i><h3>Ndërrim Ekrani</h3><p>OLED & LCD origjinale për iPhone, Samsung, Xiaomi, Huawei dhe më shumë.</p></div>
+            </div>
+            <div class="mini"><i data-lucide="droplets"></i><div><h3>Dëme nga Uji</h3><p>Pastrim & rikuperim profesional</p></div></div>
+            <div class="mini"><i data-lucide="wrench"></i><div><h3>Lidhës Karikimi</h3><p>Ndërrim port USB-C / Lightning</p></div></div>
+            <div class="mini"><i data-lucide="archive"></i><div><h3>Rikuperim të Dhënash</h3><p>Foto, video, kontakte</p></div></div>
+            <div class="mini"><i data-lucide="cpu"></i><div><h3>Probleme Software</h3><p>Çinstalim, flash, update</p></div></div>
+            <div class="mini teal"><i data-lucide="shield-check"></i><div><h3>Garanci</h3><p>Çdo riparim me garanci</p></div></div>
+          </div>
+          <div class="service-col">
+            <div class="photo-card large">
+              <img src="https://images.unsplash.com/photo-1605170439002-90845e8c0137?auto=format&fit=crop&w=1100&q=85" alt="">
+              <div class="content"><i data-lucide="battery-charging"></i><h3>Bateri të Reja</h3><p>Cilësi premium, instalim në 30 min.</p></div>
+            </div>
+            <div class="photo-card large tall">
+              <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1100&q=85" alt="">
+              <div class="content"><i data-lucide="laptop"></i><h3>Laptop & Tablet</h3><p>Microsoldering & rikuperim sistemi.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="container">
+        <div class="center">
+          <div class="kicker">Si funksionon</div>
+          <h2>Procesi në 4 hapa të thjeshtë</h2>
+        </div>
+        <div class="steps">
+          <div class="step"><b>01</b><h3>Sill pajisjen</h3><p>Vij në dyqan ose rezervo një kohë me telefon.</p></div>
+          <div class="step"><b>02</b><h3>Diagnozë falas</h3><p>Identifikojmë problemin dhe të japim çmim transparent.</p></div>
+          <div class="step"><b>03</b><h3>Riparimi i shpejtë</h3><p>Shumica e riparimeve përfundojnë në të njëjtën ditë.</p></div>
+          <div class="step"><b>04</b><h3>Garanci & dorëzim</h3><p>E testojmë me ty dhe ofrojmë garanci të plotë.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+      <div class="container">
+        <div class="center">
+          <div class="kicker">Vlerësime</div>
+          <h2>5.0 ★ në Google nga 13+ klientë</h2>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="review-grid">
+          <div class="review"><div class="stars">★★★★★</div><p>"Shërbim i shpejtë dhe çmime të ndershme. E rekomandoj pa hezitim!"</p><div class="person"><div class="avatar">E</div><div><b>Edil Tani</b><small>5 vjet më parë · Google</small></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>"Superschnell geholfen und die Ladebuchse getauscht. Fairer Preis und sehr freundlich!"</p><div class="person"><div class="avatar">L</div><div><b>Luay Redgrave</b><small>2 vjet më parë · Google</small></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>"Profesionalë dhe të shpejtë. Më rregulluan ekranin brenda 1 ore."</p><div class="person"><div class="avatar">F</div><div><b>Florian</b><small>2 vjet më parë · Google</small></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>"Ekipi më i mirë në Kavajë për riparim telefonash. Shërbim cilësor."</p><div class="person"><div class="avatar">H</div><div><b>Hamide Berberi</b><small>Klient i kënaqur · Google</small></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>"Çmime të arsyeshme, garanci dhe staf shumë i sjellshëm."</p><div class="person"><div class="avatar">E</div><div><b>Elisa Ramadan</b><small>Klient i kënaqur · Google</small></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>"Më rikuperuan të gjitha fotot nga telefoni i dëmtuar. Faleminderit!"</p><div class="person"><div class="avatar">E</div><div><b>Enxhio Idrizi</b><small>Klient i kënaqur · Google</small></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="contact-wrap" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div>
+            <div class="kicker">Na kontakto</div>
+            <h2>Gati për të rregulluar telefonin tënd?</h2>
+            <p>Telefono ose vij direkt në dyqan. Diagnoza është gjithmonë falas.</p>
+            <div class="buttons">
+<a class<a class="btn primary"<a <a class="="btn primaryhref="tel:+355675345537" href="tel:+355675345537" href="tel:+355675345537 href="tel:+355675345537 <a class="btn primary" href=="tel:+355675345537="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class<a class="btn primary" href="tel:+355675345537 <a class<a class="btn primary" href="tel:+355675345537="btn primary" href="tel:+355675345537="btn primary" href="tel:+355675345537<a class="btn primary" href=<a class="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537 <a class="btn primary" href="tel:+355675345537 <a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537"><i data-lucide="phone"></i><a class="btn primary" href= <a class="tel:+355675345537 <a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537<a class="btn primary" href="tel:+355675345537              <a class="btn primary" href="tel:+355675345537"><i data-lucide="phone"></i></a>
+              <a class="btn" href="https://maps.google.com/?q=Rruga+Gazetari+4269+Kavaje" target="_blank"><i data-lucide="map-pin"></i>Drejtimet</a>
+            </div>
+          </div>
+          <div class="info">
+            <div class="info-row"><div class="iconbox"><i data-lucide="map-pin"></i></div><div><small>Adresa</small><b>Rruga Gazetari 4269, Kavajë, Shqipëri</b></div></div>
+            <div class="info-row"><div class="iconbox"><i data-lucide="phone"></i></div><div><small>Telefon</small><b></b></div></div>
+            <div class="info-row"><div class="iconbox"><i data-lucide="clock"></i></div><div><small>Orari</small><b>E Hënë – E Diel · 09:00 – 19:00</b></div></div>
+            <div class="info-row"><div class="iconbox"><i data-lucide="mail"></i></div><div><small>Email</small><b>info@smartphoneservice.al</b></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="brand"><i data-lucide="smartphone"></i> Smartphone Service Shop</div>
+      <div>© 2026 Të gjitha të drejtat e rezervuara · Kavajë, Shqipëri</div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const target=document.querySelector(a.getAttribute('href'));
+        if(target){e.preventDefault(); target.scrollIntoView({behavior:'smooth'});}
+      });
+    });
+
+    const items=document.querySelectorAll('.stat,.mini,.photo-card,.step,.review,.contact-card');
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.animate([
+            {opacity:0, transform:'translateY(22px)'},
+            {opacity:1, transform:'translateY(0)'}
+          ],{duration:650,easing:'cubic-bezier(.2,.8,.2,1)',fill:'both'});
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:.12});
+    items.forEach(el=>{el.style.opacity=0;observer.observe(el)});
+  </script>
+</body>
+</html>
+'''
+path = Path('/mnt/data/index.html')
+path.write_text(html, encoding='utf-8')
+path.as_posix()
